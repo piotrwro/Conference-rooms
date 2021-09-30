@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from Cfrooms_reservation.views import MainPage
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('CFrooms/main-page', MainPage.as_view())
 ]
