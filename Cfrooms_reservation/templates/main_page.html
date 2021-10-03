@@ -9,11 +9,12 @@
 </head>
 
     <body>
+    {% csrf_token %}
     <p style=" text-align: left; color: blue">
-    <a href = "conf_rooms_list.html">Conference rooms list</a>
+    <a href = "http://127.0.0.1:8000/CFrooms/list_room">Conference rooms list</a>
         </p>
     <p>
-    <a href ="add_conference_room.html">Add new conference room</a>
+    <a href ="http://127.0.0.1:8000/CFrooms/add_room">Add new conference room</a>
     </p>
     </body>
 </html>
