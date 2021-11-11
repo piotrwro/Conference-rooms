@@ -11,3 +11,4 @@ class Reservation(models.Model):
     reservation_date = models.DateField()
     cfroom_id = models.ForeignKey(Conferenceroom, null=True, on_delete=models.CASCADE)
     comment = models.CharField(max_length=255)
+
