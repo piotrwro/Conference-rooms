@@ -87,8 +87,7 @@ class ReserveRoom(View):
             return HttpResponse(f"Error: Sala jest już zarezerwowana!")
         else:
             Reservation.objects.create(cfroom_id=room, reservation_date=reservation_date, comment=comment )
-            return redirect("reservationlist")
-
+            return redirect("list_room")
 class RoomDetailsView(View):
 
     def get(self, request, room_id):
@@ -96,4 +95,4 @@ class RoomDetailsView(View):
 
         reservations = cfroom.reservation_set.filter(reservation_date__gte=str(date.today())).order_by('reservation_date')
 
-        return render(request, "reservationlist.html", context={"room": cfroom, "reservations": reservations})
+        return render(request,"reservationlist.html", context={"room": cfroom, "reservations": reservations})
