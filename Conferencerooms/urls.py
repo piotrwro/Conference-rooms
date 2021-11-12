@@ -27,5 +27,5 @@ urlpatterns = [
     path('cfrooms/delete_room/<int:id>/', DeleteRoom.as_view()),
     path('cfrooms/set_room/<int:id>/', ModifyRoom.as_view()),
     path('cfrooms/reserve/<int:room_id>', ReserveRoom.as_view()),
-    path('cfrooms/resrvationlist/<int:room_id>', RoomDetailsView.as_view())
+    path('cfrooms/reservationlist/<int:room_id>', RoomDetailsView.as_view())
     ]

@@ -64,13 +64,13 @@
 
       <td class="col-2">
 
-        <a href="/CFroom/{{ room.id }}/">{{ cfroom.name }}</a>
+        <a href="/cfrooms/reservationlist/{{ cfroom.id }}">{{ cfroom.name }}</a>
 
       </td>
 
       <td class="col-1">{{ cfroom.places }}</td>
 
-      {% if room.reserved %}
+      {% if cfroom.reserved %}
 
         <td class="col-2" style="color:red;">Zarezerwowana</td>
 

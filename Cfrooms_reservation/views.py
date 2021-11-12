@@ -32,10 +32,9 @@ class AddRoom(View):
 class ListRooms(View):
     def get(self, request):
         cfrooms = Conferenceroom.objects.all()
-        for room in cfrooms:
-            reservation_dates = [reservation.reservation_date for reservation in room.reservation_set.all()]
-
-            room.reserved = date.today() in reservation_dates
+        for cfroom in cfrooms:
+            reservation_dates = [reservation.reservation_date for reservation in cfroom.reservation_set.all()]
+            cfroom.reserved = date.today() in reservation_dates
         return render(request, 'list_room.html', context={'cfrooms': cfrooms})
 
 
@@ -84,7 +83,7 @@ class ReserveRoom(View):
         reservation_date = request.POST.get('reservation_date')
         if reservation_date < str(date.today()):
             return HttpResponse(f"Date must be future date!")
-        elif Reservation.objects.filter(reservation_date=reservation_date).first():
+        elif Reservation.objects.filter(cfroom_id=room, reservation_date=reservation_date).first():
             return HttpResponse(f"Error: Sala jest już zarezerwowana!")
         else:
             Reservation.objects.create(cfroom_id=room, reservation_date=reservation_date, comment=comment )
@@ -93,8 +92,8 @@ class ReserveRoom(View):
 class RoomDetailsView(View):
 
     def get(self, request, room_id):
-        room = Conferenceroom.objects.get(id=room_id)
+        cfroom = Conferenceroom.objects.get(id=room_id)
 
-        reservations = room.reservation_set.filter(reservation_date__gte=str(date.today())).order_by('reservation_date')
+        reservations = cfroom.reservation_set.filter(reservation_date__gte=str(date.today())).order_by('reservation_date')
 
-        return render(request, "reservationlist.html", context={"room": room, "reservations": reservations})
+        return render(request, "reservationlist.html", context={"room": cfroom, "reservations": reservations})
